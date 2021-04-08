@@ -13,6 +13,117 @@ from manim import *
 # Use -r <number> to specify a resolution (for example, -r 1080
 # for a 1920x1080 video)
 
+#config.background_color = WHITE
+config.frame_height = 32
+config.frame_width = 18
+config.pixel_height = 1280 # 64
+config.pixel_width = 720    # 36
+class tyt1(Scene):
+    def construct(self):
+
+        # numberplane = NumberPlane()
+        # self.add(numberplane)
+
+
+        p0_0 = [0, 10, 0]
+        tt1 = Text("甲乙两人去书店买书，甲带的钱数是乙带").move_to(p0_0).scale(1.3)
+        tt2 = Text("的3倍。甲买了一套180元的《百科大全》,").scale(1.3).next_to(tt1, DOWN)
+        tt3 = Text("乙买了一套30元的《故事大王》后，").scale(1.3).next_to(tt2, DOWN)
+        tt4 = Text("两人的钱数一样多，甲原来多少钱？").scale(1.3).next_to(tt3, DOWN)
+        vg = VGroup(tt1, tt2, tt3, tt4)
+        self.add(vg)
+        self.play(Write(vg))
+
+        p1_0 = [-4, 2, 0]
+        p1_1_0 = [-2, 2, 0]
+        p1_1 = [0, 2, 0]
+
+        p2_0 = [-4, -2, 0]
+        p2_1_0 = [-2, -2, 0]
+        p2_1 = [0, -2, 0]
+        p2_2 = [4, -2, 0]
+        p2_3 = [8, -2, 0]
+
+        dot1_1 = Dot(p1_0).scale(2)
+        dot1_2 = Dot(p1_1).scale(2)
+
+        dot2_0 = Dot(p2_0).scale(2)
+        dot2_1 = Dot(p2_1).scale(2)
+        dot2_2 = Dot(p2_2).scale(2)
+        dot2_3 = Dot(p2_3).scale(2)
+
+        line1 = Line(p1_0, p1_1, stroke_width=10).set_color(YELLOW)
+        line2 = Line(p2_0, p2_1, stroke_width=10).set_color(RED)
+        line3 = Line(p2_1, p2_2, stroke_width=10).set_color(RED)
+        line4 = Line(p2_2, p2_3, stroke_width=10).set_color(RED)
+
+        t1 = Text("乙: ").scale(2).next_to(line1, LEFT, buff=1)
+        self.add(line1, t1, dot1_1, dot1_2)
+        self.play(GrowFromCenter(line1))
+        #self.wait(1)
+        t2 = Text("甲: ").scale(2).next_to(line2, LEFT, buff=1)
+        self.add(line2,t2, dot2_0,dot2_1)
+        self.play(FadeIn(line2))
+        self.add(line3, dot2_2)
+        self.play(FadeIn(line3))
+        self.add(line4, dot2_3)
+        self.play(FadeIn(line4))
+
+        line_sub = DashedLine(p1_1_0, p2_1_0, stroke_width=10).set_color(GRAY).scale(2)
+        self.add(line_sub)
+        self.play(FadeIn(line_sub))
+
+        line1_b = Line(p1_1_0, p1_1, stroke_width=10).set_color(YELLOW)
+        line2_b = Line(p2_1_0, p2_3, stroke_width=10).set_color(RED)
+        line2_b2 = Line(p2_0, p2_3, stroke_width=10).set_color(RED)
+        b1 = Brace(line1_b, direction=UP, buff=0.5)
+        b2 = Brace(line2_b, direction=UP, buff=0.5)
+        b3 = Brace(line2_b2, direction=DOWN, buff=0.5)
+        b1text = b1.get_tex("30").scale(2)
+        b2text = b2.get_tex("180").scale(2)
+
+        b3t = b3.get_tex("?").scale(2)
+        self.add(b1, b1text )
+        self.play(FadeIn(b1text))
+        self.add(b2, b2text)
+        self.play(FadeIn(b2text))
+        self.add(b3, b3t)
+        self.play(ShowCreation(b3t))
+
+        self.wait(3)
+        pd = [0, -6, 0]
+        td0 = Text("答案：").move_to(pd).scale(1.3)
+        td1 = Text("(180 - 30) ÷ (3 -1) = 75(元)").scale(1.3).next_to(td0, DOWN)
+        td2 = Text("75 x 3 = 225(元）").scale(1.3).next_to(td1, DOWN)
+
+        vg2 = VGroup(td0, td1, td2)
+        self.add(vg2)
+        self.play(ShowCreation(vg2))
+        self.wait(10)
+        # self.play(GrowFromCenter(circle))
+        # self.play(Transform(dot, dot2))
+        # self.play(MoveAlongPath(dot, circle), run_time=2, rate_func=linear)
+        # self.play(Rotating(dot, about_point=[2, 0, 0]), run_time=1.5)
+        # self.wait()
+class tyt(Scene):
+    def construct(self):
+        numberplane = NumberPlane()
+        self.add(numberplane)
+
+        text=Text("This  唐元天")
+
+        self.play(Write(text))
+        framebox1 = SurroundingRectangle(text[4], buff = .1)
+        framebox2 = SurroundingRectangle(text[5], buff = .1)
+        self.play(
+            ShowCreation(framebox1),
+        )
+        self.wait()
+        self.play(
+            ReplacementTransform(framebox1,framebox2),
+        )
+
+        self.wait(2)
 
 class OpeningManim(Scene):
     def construct(self):
@@ -95,7 +206,7 @@ class WarpSquare(Scene):
 
 class WriteStuff(Scene):
     def construct(self):
-        example_text = Tex("This is a some text", tex_to_color_map={"text": YELLOW})
+        example_text = Tex("This is a some text 中文", tex_to_color_map={"text": YELLOW})
         example_tex = MathTex(
             "\\sum_{k=1}^\\infty {1 \\over k^2} = {\\pi^2 \\over 6}",
         )
